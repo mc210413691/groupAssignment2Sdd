@@ -16,6 +16,6 @@ public abstract class technicalEmployee extends employee {
     public String employeeStatus(){
         String result;
         result = super.employeeStatus();
-        result result;
+        return result;
     }
 }
