@@ -58,4 +58,7 @@ private boolean manager;
         }
     }
     }
+    
+    //related problem with technicalEmployee.java
+    protected abstract String employeeStatus();
 }
