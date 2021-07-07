@@ -6,16 +6,24 @@
 //Course: MASTER OF INFORMATION TECHNOLOGY
 //Group Assignment 2: Company Structure
 
-public abstract class technicalEmployee extends employee {
-    int successfulCheckIns;
+public class technicalEmployee extends employee {
+    public int checkins;
+
 
     public technicalEmployee(String name){
-        super(name, 75000);
+
+        super(name,75000.00);
+        checkins=0;
     }
 
     public String employeeStatus(){
-        String result;
-        result = super.employeeStatus();
-        return result;
+
+        return super.toString()+" has "+checkins+" successful check ins";
     }
+
+    public void setCheckin(){
+        checkins++;
+    }
+
+
 }
