@@ -18,6 +18,8 @@ public class companyStructure {
         CTO.addReport(seB);
         CTO.addReport(seC);
 
+        System.out.println(CTO.getTeamStatus());
+
         technicalLead VPofENG = new technicalLead("Bill Gates");
         softwareEngineer seD = new softwareEngineer("Winter");
         softwareEngineer seE = new softwareEngineer("Libby");
