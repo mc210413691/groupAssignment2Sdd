@@ -6,25 +6,23 @@
 //Course: MASTER OF INFORMATION TECHNOLOGY
 //Group Assignment 2: Company Structure
 
-public abstract class businessEmployee extends employee {
+public class businessEmployee extends employee {
 
-    double bonusBudget;
 
     public businessEmployee(String name){
-        super(name,50000);
-
+        super(name,50000.00);
     }
 
-    public double getBonusBudget() {
-        double result = bonusBudget*100;
-        result = Math.round(result);
-        result /= 100;
+    public double getBonusBudget(){
         return bonusBudget;
     }
 
+    public void setBonusBudget(double bonusBudget) {
+        this.bonusBudget = bonusBudget;
+    }
+
     public String employeeStatus(){
-        String result = super.employeeStatus();
-        result = result + " with a budget of " + this.getBonusBudget();
-        return result;
+        String s= String.format("%.2f",bonusBudget);
+        return this.toString()+" with a budget of "+ s;
     }
 }
