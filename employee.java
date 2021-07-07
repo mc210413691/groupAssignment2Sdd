@@ -8,57 +8,63 @@
 
 
 public abstract class employee {
-private String name;
-private double baseSalary;
-private static int ID;
-private int employeeID;
-private employee getmanager;
-private int length;
-private boolean manager;
+    private static int countID;
 
-    public Employee(String name, double baseSalary){
-    ID++;
-    this.name = name;
-    this.baseSalary = baseSalary;
-    this.employeeID = ID;
- }
+    public String name;
+    public int employeeID;
+    public double baseSalary;
+    public double bonus;
 
-    public double getBaseSalary() {
-        return baseSalary;
+    public employee manager;
+    public accountant accountantSupport;
+    public int headcount=0;
+
+    public double bonusBudget;
+
+
+    public employee(String name, double baseSalary){
+        this.name=name;
+        this.baseSalary=baseSalary;
+        countID++;
+        this.employeeID=countID;
     }
 
-    public void setBaseSalary(double base){
-    this.baseSalary = base;
+    public double getBaseSalary(){
+        return this.baseSalary;
     }
 
-    public int getEmployeeID() {
-        return employeeID;
+    public String getName(){
+        return this.name;
+    }
+
+    public int getEmployeeID(){
+        return this.employeeID;
+    }
+
+    public employee getManager(){
+        return manager;
+    }
+
+    public accountant getAccountantSupport() {
+        return accountantSupport;
+    }
+
+    public void setManager(employee manager){
+        this.manager=manager;
     }
 
     public boolean equals(employee other){
-    boolean result = false;
-    for (int i = 0; i<=other.length; i++){
-        if (this.employeeID == other(0).employeeID){
-            return true;
-        }
-        else
-        {
-            result = false;
-        }
-
-        public String toString(){
-            return employeeID + " " + name;
-        }
-
-        public String employeeStatus(){
-
-        }
-        public employee getManager(){
-            return manager;
-        }
+        return this.getEmployeeID()==other.getEmployeeID();
     }
+
+    public String toString(){
+        return getEmployeeID()+" "+getName();
     }
-    
-    //related problem with technicalEmployee.java
-    protected abstract String employeeStatus();
+
+    public abstract String employeeStatus();
+
+    public void getBonus(){
+
+    }
+
 }
