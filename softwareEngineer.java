@@ -6,42 +6,39 @@
 //Course: MASTER OF INFORMATION TECHNOLOGY
 //Group Assignment 2: Company Structure
 
-public class softwareEngineer extends technicalEmployee {
-    private boolean codeAccess;
-    private technicalLead manager;
+public class softwareEngineer extends technicalEmployee{
+    public boolean CodeAccess;
+
     public softwareEngineer(String name){
         super(name);
-        codeAccess = false;
-        successfulCheckIns = 0;
+        setCodeAccess(true);
     }
-    
+
     public boolean getCodeAccess(){
-        return this.codeAccess;
+        return CodeAccess;
     }
-    
+
     public void setCodeAccess(boolean access){
-        this.codeAccess = access;
+        this.CodeAccess=access;
     }
-    
-    public int getSuccessfulCheckIn(){
-        return this.successfulCheckIns;
+
+    public int getSuccessfulCheckIns(){
+        return checkins;
     }
-    
+
     public boolean checkInCode(){
-        if(manager.approveCheckIn(this)){
-            this.successfulCheckIns++;
+        technicalLead manager=(technicalLead) this.getManager();
+        if (manager.approveCheckIn(this)){
+            this.checkins++;
             return true;
-        }
-        else 
-        {
-            setCodeAccess(false);
+        } else {
+            CodeAccess=false;
             return false;
         }
     }
-    
-    public String employeeStatus(){
-        String result = super.employeeStatus();
-        result += " has " + getSuccessfulCheckIn() + " successful check ins.";
-        return result;
+    public void setManger(technicalEmployee manager){
+
+        super.manager=manager;
     }
 }
+
