@@ -7,44 +7,39 @@
 //Group Assignment 2: Company Structure
 
 public class accountant extends businessEmployee {
-    private double bonusBudget;
-    private technicalLead techLeaderSupported;
-    private employee manager;
+    public technicalLead teamSupported;
+
     public accountant(String name){
         super(name);
-        bonusBudget = 0;
+        bonusBudget=0;
     }
 
-    public technicalLead getTechLeaderSupported() {
-        return techLeaderSupported;
+    public technicalLead getTeamSupported(){
+        return teamSupported;
     }
 
     public void supportTeam(technicalLead lead){
-        this.techLeaderSupported = lead;
-        for (int i=0; i < lead.getNumberOfDirectReports(); i++){
-            if(lead.getNumberOfDirectReports() > 0){
-                this.bonusBudget = bonusBudget + lead.getDirectReport()[i].getBaseSalary()*1.1;
-            }
+        this.teamSupported=lead;
+        for (int i=0; i<lead.team.size(); i++){
+            this.bonusBudget+=lead.team.get(i).getBaseSalary()*1.1;
         }
     }
 
-    public boolean approveBonus(double bonus){
-        if(techLeaderSupported = null || bonus > bonusBudget){
+    public boolean canApproveBonus(double bonus){
+        double requestedBonus=bonus;
+        if (requestedBonus<=getBonusBudget()){
+            return true;
+        } else {
+            System.out.print(" Rejected because Budget not sufficient. ");
             return false;
         }
-        else {
-            return true;
-        }
+
     }
 
     public String employeeStatus(){
-        String result;
-        result = this.getEmployeeID() + " " +
-                this.getName() + " with a budget of " + this.bonusBudget;
-        if(techLeaderSupported != null){
-            result = result + " and is supporting" +
-                    techLeaderSupported.getName();
-        }
-        return result;
+        return this.toString()+" with a budget of "+ getBonusBudget()+" is supporting "+ this.getTeamSupported();
     }
+
+
+
 }
