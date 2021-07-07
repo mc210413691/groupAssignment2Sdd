@@ -6,76 +6,74 @@
 //Course: MASTER OF INFORMATION TECHNOLOGY
 //Group Assignment 2: Company Structure
 
-public class businessLead extends businessEmployee{
-    private int headCount;
-    private int directReports;
-    private employee[] listOfDirectReports = new employee[10];
+import java.util.ArrayList;
+
+public class businessLead  extends businessEmployee{
+    public ArrayList<accountant> team;
+
     public businessLead(String name){
         super(name);
-        this.headCount = 10;
-        setBaseSalary(2*super.getBaseSalary());
-        this.directReports = 0;
+        this.baseSalary=getBaseSalary()*2;
+        this.headcount=10;
+        this.team=new ArrayList<accountant>();
     }
 
     public boolean hasHeadCount(){
-        return this.directReports < this.headCount;
+        if(this.team.size()<this.headcount){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean addReport(accountant e, technicalLead supportTeam){
-        if(hasHeadCount()){
-            listOfDirectReports[directReports] = e;
-            directReports++;
-            bonusBudget = bonusBudget + e.getBaseSalary()*1.1;
-            supportTeam.setAccountant(e);
+          if (hasHeadCount()){
+
+            team.add(e);
+            e.setManager(this);
+            this.bonusBudget+=e.baseSalary*1.1;
             e.supportTeam(supportTeam);
+            supportTeam.accountantSupport=e;
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
     public boolean requestBonus(employee e, double bonus){
-        if(bonus <= bonusBudget){
-            e.setBaseSalary(e.getBaseSalary() + bonus);
-            bonusBudget -= bonus;
+        if (bonus<=getBonusBudget()){
+            this.bonusBudget-=bonus;
+            e.bonusBudget+=bonus;
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
-    public boolean approveBonus(employee e, double bonus) {
-        boolean result = false;
-        for (int i = 0; i < headCount; i++) {
-            accountant myAccountant = (accountant) listOfDirectReports[i];
-            if (e.getManager().equals(myAccountant.getTeamSupported())) {
-                if (myAccountant.approveBonus(bonus)) {
-                    return true;
-                } else {
-                    result = false;
-                    return result;
-                }
-                else{
-                    result = false;
-                    return result;
-                }
-                return result;
+
+    public boolean approveBonus(employee e, double bonus){
+
+        for (int i=0;i<team.size();i++){
+            if((team.get(i).getTeamSupported()).equals(e.manager) && team.get(i).canApproveBonus(bonus)) {
+                e.bonus += bonus;
+                team.get(i).bonusBudget -= bonus;
+                return true;
             }
         }
+        return  false;
     }
 
-            public String getTeamStatus(){
-                String result;
-                result = employee() + " and is managing: " + "\n";
-                for (int i=0; i < headCount; i++){
-                    if (listOfDirectReports[i] != null){
-                        result = result + listOfDirectReports[i].employeeStatus() + "\n";
-                    }
-                }
-                return result;
+    public String getTeamStatus(){
+
+        if (team.size()==0){
+            return this.employeeStatus()+ " and no direct reports yet";
+        } else {
+            String teamStatus="";
+            for (int i=0;i<team.size();i++){
+                teamStatus+=("    "+team.get(i).employeeStatus()+"\n");
             }
+            return this.employeeStatus()+" and is managing: \n"+teamStatus;
 
+        }
     }
-
+}
